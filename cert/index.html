@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Certifications — Worapol Siriburi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0c0f;
+      --surface: #111418;
+      --border: #1e2530;
+      --accent: #00e5ff;
+      --accent2: #7c3aed;
+      --text: #e8edf3;
+      --muted: #6b7a90;
+      --mono: 'IBM Plex Mono', monospace;
+      --display: 'Syne', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 14px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,229,255,0.015) 2px, rgba(0,229,255,0.015) 4px);
+      pointer-events: none;
+      z-index: 998;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 48px;
+      background: rgba(10, 12, 15, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--display);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+    .nav-logo span { color: var(--text); }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 140px 48px 64px;
+      max-width: 1200px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .page-title {
+      font-family: var(--display);
+      font-size: clamp(36px, 5vw, 72px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1.0;
+      margin-bottom: 16px;
+    }
+    .page-desc {
+      color: var(--muted);
+      font-size: 13px;
+      max-width: 520px;
+      line-height: 1.8;
+    }
+
+    /* CERT GRID */
+    .cert-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 64px 48px;
+    }
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    /* CERT CARD */
+    .cert-card {
+      background: var(--surface);
+      padding: 0;
+      transition: background 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .cert-card:hover { background: #141a22; }
+    .cert-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--accent);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.3s ease;
+    }
+    .cert-card:hover::before { transform: scaleY(1); }
+
+    .cert-badge-area {
+      height: 200px;
+      background: #0d1117;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cert-badge-area::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(0,229,255,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* SVG BADGE for TryHackMe */
+    .badge-thm {
+      width: 140px;
+      height: 140px;
+    }
+    /* SVG BADGE for kWAPTA */
+    .badge-kwap {
+      width: 140px;
+      height: 140px;
+    }
+
+    /* Actual image badges if user uploads them */
+    .cert-badge-area img {
+      max-width: 140px;
+      max-height: 140px;
+      object-fit: contain;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 0 16px rgba(0,229,255,0.3));
+    }
+
+    .cert-info {
+      padding: 24px 28px 28px;
+    }
+    .cert-issuer {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .cert-name {
+      font-family: var(--display);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+    .cert-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .cert-meta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .cert-tag {
+      padding: 3px 10px;
+      border: 1px solid var(--border);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+    .cert-tag.highlight {
+      border-color: rgba(0,229,255,0.3);
+      color: var(--accent);
+      background: rgba(0,229,255,0.05);
+    }
+    .cert-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      font-size: 11px;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: gap 0.2s;
+    }
+    .cert-link:hover { gap: 10px; }
+
+    /* PLACEHOLDER BADGE SVGS (inline, styled) */
+    .badge-svg-thm {
+      width: 130px;
+      height: 130px;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 0 20px rgba(0,229,255,0.4));
+    }
+    .badge-svg-kwap {
+      width: 130px;
+      height: 130px;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 0 20px rgba(124,58,237,0.5));
+    }
+
+    /* ACHIEVEMENTS ROW */
+    .achievements-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px 96px;
+    }
+    .section-title {
+      font-family: var(--display);
+      font-size: clamp(24px, 3vw, 40px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 32px;
+    }
+    .ach-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .ach-item {
+      background: var(--surface);
+      padding: 28px 20px;
+      text-align: center;
+    }
+    .ach-icon {
+      font-size: 28px;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .ach-title {
+      font-family: var(--display);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .ach-sub { font-size: 11px; color: var(--muted); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo { font-family: var(--display); font-size: 18px; font-weight: 800; color: var(--accent); }
+    .footer-copy { font-size: 11px; color: var(--muted); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ANIMATIONS */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .page-header { padding: 100px 24px 48px; }
+      .cert-section { padding: 48px 24px; }
+      .achievements-section { padding: 0 24px 64px; }
+      .cert-grid { grid-template-columns: 1fr; }
+      .ach-grid { grid-template-columns: repeat(2, 1fr); }
+      footer { padding: 32px 24px; }
+    }
+
+    /* NOTE BANNER */
+    .note-banner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+    .note-inner {
+      background: rgba(0,229,255,0.04);
+      border: 1px solid rgba(0,229,255,0.2);
+      border-left: 3px solid var(--accent);
+      padding: 14px 20px;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    .note-inner strong { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">WS<span>.</span></a>
+  <div class="nav-links">
+    <a href="../index.html">About</a>
+    <a href="index.html" class="active">Certifications</a>
+    <a href="mailto:worapolsiriburi@gmail.com">Contact</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header fade-in">
+  <div class="section-label">// Credentials</div>
+  <h1 class="page-title">Certifications</h1>
+  <p class="page-desc">Verified credentials in cybersecurity, penetration testing, and web application security. Continuously expanding expertise through hands-on learning platforms and industry-recognized programs.</p>
+</div>
+
+<!-- NOTE -->
+<div class="note-banner" style="padding-top:32px">
+  <div class="note-inner">
+    <strong>Note:</strong> To display your actual certificate badges/images, place them in the <code>cert/badges/</code> folder and update the <code>src</code> attributes in this file. Placeholder badges are shown below.
+  </div>
+</div>
+
+<!-- CERT GRID -->
+<div class="cert-section">
+  <div class="cert-grid fade-in">
+
+    <!-- TryHackMe SEC-1 -->
+    <div class="cert-card">
+      <div class="cert-badge-area">
+        <!-- Replace src with your actual badge image: badges/tryhackme-sec1.png -->
+        <!-- <img src="badges/tryhackme-sec1.png" alt="TryHackMe SEC-1 Badge"/> -->
+        <!-- Placeholder SVG Badge -->
+        <svg class="badge-svg-thm" viewBox="0 0 130 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="65" cy="65" r="62" stroke="#00e5ff" stroke-width="2" stroke-dasharray="6 3"/>
+          <circle cx="65" cy="65" r="52" fill="#0d1117" stroke="#1e2530" stroke-width="1"/>
+          <polygon points="65,28 80,50 72,50 72,82 58,82 58,50 50,50" fill="#00e5ff" opacity="0.9"/>
+          <rect x="44" y="82" width="42" height="4" rx="1" fill="#00e5ff" opacity="0.5"/>
+          <text x="65" y="100" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#00e5ff" letter-spacing="2">SEC-1</text>
+          <text x="65" y="114" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7" fill="#6b7a90" letter-spacing="1">TRYHACKME</text>
+        </svg>
+      </div>
+      <div class="cert-info">
+        <div class="cert-issuer">TryHackMe</div>
+        <div class="cert-name">Cyber Security 101 (SEC-1)</div>
+        <div class="cert-desc">
+          Foundational cybersecurity certification covering essential concepts including networking, operating systems, web application security, and core defensive/offensive techniques.
+        </div>
+        <div class="cert-meta">
+          <span class="cert-tag highlight">Cybersecurity</span>
+          <span class="cert-tag">Networking</span>
+          <span class="cert-tag">Web Security</span>
+        </div>
+        <a href="https://tryhackme.com" target="_blank" class="cert-link">Verify →</a>
+      </div>
+    </div>
+
+    <!-- kWAPTA -->
+    <div class="cert-card">
+      <div class="cert-badge-area">
+        <!-- Replace src with your actual badge image: badges/kwap-ta.png -->
+        <!-- <img src="badges/kwap-ta.png" alt="kWAPTA Certificate Badge"/> -->
+        <!-- Placeholder SVG Badge -->
+        <svg class="badge-svg-kwap" viewBox="0 0 130 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="65,4 124,36 124,94 65,126 6,94 6,36" stroke="#7c3aed" stroke-width="2" fill="none" stroke-dasharray="6 3"/>
+          <polygon points="65,18 110,44 110,86 65,112 20,86 20,44" fill="#0d1117" stroke="#1e2530" stroke-width="1"/>
+          <circle cx="65" cy="65" r="20" fill="none" stroke="#7c3aed" stroke-width="2"/>
+          <circle cx="65" cy="65" r="12" fill="#7c3aed" opacity="0.2"/>
+          <path d="M55 65 L62 72 L75 58" stroke="#7c3aed" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <text x="65" y="98" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" fill="#7c3aed" letter-spacing="2">kWAPTA</text>
+          <text x="65" y="110" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7" fill="#6b7a90" letter-spacing="1">KNIGHT SQUAD</text>
+        </svg>
+      </div>
+      <div class="cert-info">
+        <div class="cert-issuer">Knight Squad Academy</div>
+        <div class="cert-name">kWAPTA Certification</div>
+        <div class="cert-desc">
+          Web application penetration testing and analysis certification from Knight Squad Academy, covering vulnerability assessment, exploitation techniques, and security testing methodologies.
+        </div>
+        <div class="cert-meta">
+          <span class="cert-tag highlight">Pen Testing</span>
+          <span class="cert-tag">Web App Security</span>
+          <span class="cert-tag">OWASP</span>
+        </div>
+        <a href="https://knightsquadacademy.com" target="_blank" class="cert-link">Verify →</a>
+      </div>
+    </div>
+
+    <!-- PLACEHOLDER: Add more certs here -->
+    <div class="cert-card" style="opacity:0.45; pointer-events:none;">
+      <div class="cert-badge-area" style="height:200px; display:flex; align-items:center; justify-content:center;">
+        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+          <rect x="1" y="1" width="58" height="58" rx="4" stroke="#1e2530" stroke-width="2" stroke-dasharray="4 3"/>
+          <text x="30" y="34" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="22" fill="#1e2530">+</text>
+        </svg>
+      </div>
+      <div class="cert-info">
+        <div class="cert-issuer">Upcoming</div>
+        <div class="cert-name">Next Certification</div>
+        <div class="cert-desc">Continuously adding new credentials. Check back soon for updates.</div>
+        <div class="cert-meta">
+          <span class="cert-tag">In Progress</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ACHIEVEMENTS -->
+<div class="achievements-section">
+  <div class="section-label">// Recognition</div>
+  <div class="section-title">Competition Results</div>
+  <div class="ach-grid fade-in">
+    <div class="ach-item">
+      <span class="ach-icon">🏆</span>
+      <div class="ach-title">Top 20 Teams</div>
+      <div class="ach-sub">Thailand Anti-Scam Ideathon · Google 2026</div>
+    </div>
+    <div class="ach-item">
+      <span class="ach-icon">🥇</span>
+      <div class="ach-title">Rank 71 / 1,200+</div>
+      <div class="ach-sub">NCSA AI CTF 2026 · Top 200 Finalists</div>
+    </div>
+    <div class="ach-item">
+      <span class="ach-icon">🔐</span>
+      <div class="ach-title">Samsung × KBTG</div>
+      <div class="ach-sub">Digital Fraud Hackathon · 2026</div>
+    </div>
+    <div class="ach-item">
+      <span class="ach-icon">🎯</span>
+      <div class="ach-title">Cyber Top Talent</div>
+      <div class="ach-sub">NCSA CTF · 2025</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">WS.</div>
+  <div class="footer-copy">© 2026 Worapol Siriburi. Bangkok, Thailand.</div>
+  <div class="footer-links">
+    <a href="../index.html">About</a>
+    <a href="index.html">Certs</a>
+    <a href="https://linkedin.com/in/worapol-siriburi-1b4532218" target="_blank">LinkedIn</a>
+    <a href="mailto:worapolsiriburi@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
