@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Worapol Siriburi — Computer Science &amp; Law</title>
+<meta name="description" content="Worapol Siriburi — Computer Science and Law student at Bangkok University, specializing in cybersecurity and data science. Cybersecurity Intern at EGUARDIAN Thailand, IBM Z Student Ambassador." />
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #faf9f5;
+    --paper-dim: #f2f0e8;
+    --ink: #1b1d22;
+    --ink-soft: #3d4048;
+    --muted: #71757d;
+    --line: #e2ded2;
+    --accent: #2b4c82;
+    --accent-dim: rgba(43, 76, 130, 0.08);
+    --serif: 'IBM Plex Serif', Georgia, serif;
+    --sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+    --max: 1080px;
+    --text-max: 700px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink-soft);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: var(--serif); color: var(--ink); margin: 0; font-weight: 600; }
+  p { margin: 0 0 1em; }
+  a { color: inherit; }
+  ul { margin: 0; padding: 0; list-style: none; }
+  img { max-width: 100%; display: block; }
+
+  ::selection { background: var(--accent-dim); color: var(--ink); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+
+  /* ---------- NAV ---------- */
+  header.site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(250, 249, 245, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-mark {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .nav-mark span { color: var(--accent); }
+  nav.nav-links { display: flex; gap: 28px; }
+  nav.nav-links a {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    padding-bottom: 3px;
+    border-bottom: 1px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  nav.nav-links a:hover { color: var(--ink); border-color: var(--line); }
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: 1px solid var(--line);
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 16px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 72px 32px 88px;
+    display: grid;
+    grid-template-columns: 1.3fr 0.9fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 18px;
+    opacity: 0;
+    animation: rise 0.7s ease forwards;
+  }
+  .hero h1 {
+    font-size: clamp(38px, 5vw, 58px);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    opacity: 0;
+    animation: rise 0.7s ease 0.08s forwards;
+  }
+  .hero-role {
+    font-size: 18px;
+    color: var(--ink-soft);
+    margin: 18px 0 22px;
+    max-width: 480px;
+    opacity: 0;
+    animation: rise 0.7s ease 0.16s forwards;
+  }
+  .hero-desc {
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 480px;
+    line-height: 1.75;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: rise 0.7s ease 0.24s forwards;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    opacity: 0;
+    animation: rise 0.7s ease 0.32s forwards;
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 20px;
+    font-family: var(--mono);
+    font-size: 13px;
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    background: transparent;
+    transition: background 0.18s ease, color 0.18s ease;
+  }
+  .btn:hover { background: var(--ink); color: var(--paper); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+  .btn.primary:hover { background: #1e3a68; border-color: #1e3a68; }
+
+  .hero-photo {
+    opacity: 0;
+    animation: rise 0.7s ease 0.2s forwards;
+  }
+  .photo-card {
+    position: relative;
+    border: 1px solid var(--line);
+    background: var(--paper-dim);
+    padding: 14px;
+  }
+  .photo-card img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    filter: grayscale(35%) contrast(1.03);
+  }
+  .photo-caption {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: 12px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+  .photo-caption .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: inline-block;
+    margin-right: 6px;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section { padding: 80px 32px; border-top: 1px solid var(--line); }
+  section .wrap-inner { max-width: var(--max); margin: 0 auto; }
+  .section-head {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 48px;
+    margin-bottom: 44px;
+  }
+  .section-head h2 { font-size: 28px; }
+  .section-head .section-note { color: var(--muted); font-size: 14.5px; max-width: var(--text-max); line-height: 1.75; padding-top: 4px; }
+  .section-body { display: grid; grid-template-columns: 220px 1fr; gap: 48px; }
+  .section-body > .col-side { color: var(--muted); font-size: 13px; }
+
+  /* ---------- ABOUT ---------- */
+  #about .about-text { max-width: var(--text-max); font-size: 15.5px; line-height: 1.85; color: var(--ink-soft); }
+  #about .about-text strong { color: var(--ink); font-weight: 600; }
+  .fact-list { border-top: 1px solid var(--line); margin-top: 8px; }
+  .fact-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 16px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+  }
+  .fact-row dt { font-family: var(--mono); color: var(--muted); font-size: 12.5px; }
+  .fact-row dd { margin: 0; color: var(--ink-soft); }
+  .fact-row a { color: var(--accent); text-decoration: none; }
+  .fact-row a:hover { text-decoration: underline; }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline { position: relative; border-left: 1px solid var(--line); }
+  .tl-entry { position: relative; padding: 0 0 40px 32px; }
+  .tl-entry:last-child { padding-bottom: 0; }
+  .tl-entry::before {
+    content: '';
+    position: absolute;
+    left: -5px; top: 5px;
+    width: 9px; height: 9px;
+    background: var(--paper);
+    border: 2px solid var(--accent);
+    transform: rotate(45deg);
+  }
+  .tl-period { font-family: var(--mono); font-size: 12px; color: var(--accent); margin-bottom: 5px; }
+  .tl-title { font-family: var(--serif); font-size: 19px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+  .tl-org { font-size: 13.5px; color: var(--muted); margin-bottom: 10px; }
+  .tl-points { font-size: 14px; color: var(--ink-soft); line-height: 1.75; }
+  .tl-points li { position: relative; padding-left: 16px; margin-bottom: 4px; }
+  .tl-points li::before { content: '–'; position: absolute; left: 0; color: var(--muted); }
+
+  /* ---------- COMPETITIONS ---------- */
+  .comp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .comp-card { background: var(--paper); padding: 26px 28px; }
+  .comp-org { font-family: var(--mono); font-size: 11.5px; color: var(--accent); margin-bottom: 8px; }
+  .comp-title { font-family: var(--serif); font-size: 17px; font-weight: 600; color: var(--ink); margin-bottom: 8px; line-height: 1.3; }
+  .comp-desc { font-size: 13.5px; color: var(--muted); line-height: 1.7; margin-bottom: 14px; }
+  .comp-result { display: inline-block; font-family: var(--mono); font-size: 11.5px; color: var(--ink-soft); border: 1px solid var(--line); padding: 3px 9px; }
+
+  /* ---------- SKILLS ---------- */
+  .skill-block { margin-bottom: 26px; }
+  .skill-block:last-child { margin-bottom: 0; }
+  .skill-cat { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-tag {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    padding: 5px 11px;
+  }
+
+  .cert-list { margin-top: 8px; }
+  .cert-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .cert-row:first-child { border-top: 1px solid var(--line); }
+  .cert-name { font-size: 14.5px; color: var(--ink); font-weight: 500; }
+  .cert-issuer { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 64px 32px 40px;
+  }
+  .footer-inner { max-width: var(--max); margin: 0 auto; }
+  footer h2 { font-size: 26px; margin-bottom: 14px; }
+  .footer-desc { color: var(--muted); font-size: 15px; max-width: var(--text-max); margin-bottom: 30px; line-height: 1.75; }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: 32px;
+    margin-bottom: 48px;
+  }
+  .contact-item dt { font-family: var(--mono); font-size: 11.5px; color: var(--muted); margin-bottom: 6px; }
+  .contact-item dd { margin: 0; font-size: 14.5px; }
+  .contact-item a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); }
+  .contact-item a:hover { color: var(--accent); border-color: var(--accent); }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; padding-top: 48px; }
+    .hero-photo { order: -1; max-width: 260px; }
+    .section-head, .section-body { grid-template-columns: 1fr; gap: 16px; }
+    .comp-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    nav.nav-links { display: none; }
+    .nav-toggle { display: block; }
+    header.site-nav.open nav.nav-links {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      padding: 16px 32px 20px;
+      gap: 16px;
+    }
+    section { padding: 56px 24px; }
+    .hero { padding: 40px 24px 56px; }
+    .wrap, .nav-inner { padding-left: 24px; padding-right: 24px; }
+    .contact-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+    footer { padding: 48px 24px 32px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav" id="siteNav">
+  <div class="nav-inner">
+    <a href="#home" class="nav-mark">Worapol<span>.</span></a>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#background">Background</a>
+      <a href="#leadership">Leadership</a>
+      <a href="#competitions">Competitions</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">≡</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Bangkok, Thailand</div>
+    <h1>Worapol Siriburi</h1>
+    <p class="hero-role">Computer Science &amp; Law student, specializing in cybersecurity and data science.</p>
+    <p class="hero-desc">
+      Currently a Cybersecurity Intern at EGUARDIAN Thailand, pursuing a dual degree across
+      Bangkok University and Ramkhamhaeng University. I work across security operations,
+      Web3 research, and building technical communities on campus.
+    </p>
+    <div class="hero-actions">
+      <a href="mailto:worapolsiriburi@gmail.com" class="btn primary">Email me</a>
+      <a href="https://linkedin.com/in/worapol-siriburi-1b4532218" target="_blank" rel="noopener" class="btn">LinkedIn</a>
+      <a href="assets/Worapol-Siriburi-CV.pdf" target="_blank" class="btn">Résumé (PDF)</a>
+    </div>
+  </div>
+  <div class="hero-photo">
+    <div class="photo-card">
+      <img src="assets/photo.jpg" alt="Portrait of Worapol Siriburi" />
+      <div class="photo-caption">
+        <span><span class="dot"></span>Open to opportunities</span>
+        <span>GPA 3.71 / 4.00</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap-inner">
+    <div class="section-head">
+      <h2>About</h2>
+      <div class="section-note">A short introduction, and the details that don't fit in a sentence.</div>
+    </div>
+    <div class="section-body">
+      <div class="col-side"></div>
+      <div>
+        <div class="about-text">
+          <p>
+            I'm a second-year Computer Science undergraduate at Bangkok University, majoring in
+            <strong>Data Science and Cybersecurity</strong>, while concurrently reading for a
+            <strong>Bachelor of Laws</strong> at Ramkhamhaeng University with a focus on digital
+            law and cybercrime regulation. The two sides inform each other: security work benefits
+            from understanding the regulatory frameworks — PDPA, GDPR, ISO 27001 — that shape it.
+          </p>
+          <p>
+            My experience spans SOC operations and incident response at EGUARDIAN Thailand, AI
+            evaluation work with Outlier, and internal tooling at LINE MAN Wongnai, where a Slack
+            bot I built cut IT support ticket volume by 20%. Outside of internships, I've competed
+            in national CTFs and hackathons, and I lead three campus communities in cloud, mainframe,
+            and career development.
+          </p>
+        </div>
+        <dl class="fact-list">
+          <div class="fact-row"><dt>Location</dt><dd>Bangkok, Thailand</dd></div>
+          <div class="fact-row"><dt>Education</dt><dd>B.Sc. Computer Science, Bangkok University &amp; LL.B., Ramkhamhaeng University</dd></div>
+          <div class="fact-row"><dt>GPA</dt><dd>3.71 / 4.00</dd></div>
+          <div class="fact-row"><dt>Focus</dt><dd>SOC operations, threat analysis, Web3 security</dd></div>
+          <div class="fact-row"><dt>Email</dt><dd><a href="mailto:worapolsiriburi@gmail.com">worapolsiriburi@gmail.com</a></dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BACKGROUND: EDUCATION + EXPERIENCE -->
+<section id="background">
+  <div class="wrap-inner">
+    <div class="section-head">
+      <h2>Background</h2>
+      <div class="section-note">Education and work experience, most recent first.</div>
+    </div>
+    <div class="section-body">
+      <div class="col-side"></div>
+      <div class="timeline">
+
+        <div class="tl-entry">
+          <div class="tl-period">Aug 2026 – Present</div>
+          <div class="tl-title">Cybersecurity Intern</div>
+          <div class="tl-org">EGUARDIAN Thailand</div>
+          <ul class="tl-points">
+            <li>Supporting SOC operations and incident response, including security monitoring, alert analysis, and incident investigation</li>
+            <li>Conducting vulnerability assessment and penetration testing (VA/PT), and contributing to technical reports and TOR preparation</li>
+          </ul>
+        </div>
+
+        <div class="tl-entry">
+          <div class="tl-period">Apr 2026 – Present</div>
+          <div class="tl-title">AI Trainer</div>
+          <div class="tl-org">Outlier · Remote</div>
+          <ul class="tl-points">
+            <li>Evaluating and improving Thai-language AI responses for accuracy, fluency, and cultural context</li>
+            <li>Writing and reviewing prompts, annotating AI-generated content, and giving structured feedback on model performance</li>
+          </ul>
+        </div>
+
+        <div class="tl-entry">
+          <div class="tl-period">May 2026 – Jul 2026</div>
+          <div class="tl-title">IT Support Intern</div>
+          <div class="tl-org">LINE MAN Wongnai</div>
+          <ul class="tl-points">
+            <li>Built and deployed a Slack automation bot for ticket intake, reducing IT support ticket volume by 20%</li>
+            <li>Developed an AI-powered chatbot integrated with a Notion knowledge base for employee self-service support</li>
+          </ul>
+        </div>
+
+        <div class="tl-entry">
+          <div class="tl-period">2025 – Present</div>
+          <div class="tl-title">B.Sc. Computer Science</div>
+          <div class="tl-org">Bangkok University — Data Science &amp; Cybersecurity</div>
+          <ul class="tl-points">
+            <li>GPA 3.71 / 4.00</li>
+            <li>Coursework: network security, cryptography, data structures, algorithms, database systems</li>
+          </ul>
+        </div>
+
+        <div class="tl-entry">
+          <div class="tl-period">2024 – Present</div>
+          <div class="tl-title">Bachelor of Laws (LL.B.)</div>
+          <div class="tl-org">Ramkhamhaeng University — Concurrent dual degree</div>
+          <ul class="tl-points">
+            <li>Focus on digital law and cybercrime regulation</li>
+          </ul>
+        </div>
+
+        <div class="tl-entry">
+          <div class="tl-period">Jan 2021 – Jun 2025</div>
+          <div class="tl-title">Crypto &amp; Web3 Researcher / Community Moderator</div>
+          <div class="tl-org">Independent</div>
+          <ul class="tl-points">
+            <li>Active in cryptocurrency, DeFi, and blockchain ecosystems including Optimism, Arbitrum, and zkSync</li>
+            <li>Moderated DAO and Web3 communities and onboarded new users on security and usage questions</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section id="leadership">
+  <div class="wrap-inner">
+    <div class="section-head">
+      <h2>Leadership &amp; community</h2>
+      <div class="section-note">Building technical communities alongside coursework and internships.</div>
+    </div>
+    <div class="section-body">
+      <div class="col-side"></div>
+      <div class="timeline">
+
+        <div class="tl-entry">
+          <div class="tl-period">Jun 2026 – Present</div>
+          <div class="tl-title">Founder &amp; Leader</div>
+          <div class="tl-org">BU Builders Club</div>
+          <ul class="tl-points">
+            <li>Founded and lead a cross-disciplinary student community with 500+ members across LINE OpenChat, Instagram, TikTok, and Facebook</li>
+            <li>Organize career talks, certification prep, and hackathons, connecting members with professionals from AWS, Microsoft, and Agoda</li>
+          </ul>
+        </div>
+
+        <div class="tl-entry">
+          <div class="tl-period">Jun 2026 – Present</div>
+          <div class="tl-title">Founder, AWS Student Builder Group</div>
+          <div class="tl-org">Bangkok University</div>
+          <ul class="tl-points">
+            <li>Established and grew the AWS Student Builder community, recruiting and leading students to drive cloud awareness on campus</li>
+            <li>Organized hands-on AWS workshops toward certifications such as AWS Certified Cloud Practitioner</li>
+          </ul>
+        </div>
+
+        <div class="tl-entry">
+          <div class="tl-period">Apr 2026 – Present</div>
+          <div class="tl-title">IBM Z Student Ambassador</div>
+          <div class="tl-org">Bangkok University — First in Thailand</div>
+          <ul class="tl-points">
+            <li>Organizing workshops and driving student engagement in mainframe technology and the Z Xplore platform</li>
+            <li>Earned the IBM Z Concepts certification and built a growing mainframe community through campus events</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETITIONS -->
+<section id="competitions">
+  <div class="wrap-inner">
+    <div class="section-head">
+      <h2>Competitions</h2>
+      <div class="section-note">National-level CTFs and hackathons.</div>
+    </div>
+    <div class="comp-grid">
+
+      <div class="comp-card">
+        <div class="comp-org">Google Thailand · 2026</div>
+        <div class="comp-title">Securing Digital Trust: Thailand Anti-Scam Ideathon</div>
+        <div class="comp-desc">Applied threat modeling and digital fraud prevention concepts in a competitive judged setting.</div>
+        <span class="comp-result">Top 20 nationwide</span>
+      </div>
+
+      <div class="comp-card">
+        <div class="comp-org">NCSA · 2026</div>
+        <div class="comp-title">NCSA AI CTF 2026</div>
+        <div class="comp-desc">Solved challenges in AI security, adversarial reasoning, and logical analysis under time pressure.</div>
+        <span class="comp-result">Rank 65 / 1,200+ teams</span>
+      </div>
+
+      <div class="comp-card">
+        <div class="comp-org">NCSA &amp; Cisco · 2026</div>
+        <div class="comp-title">NCSA × Cisco CTF 2026</div>
+        <div class="comp-desc">Practical offensive and defensive challenges spanning vulnerability analysis and ethical hacking.</div>
+        <span class="comp-result">Rank 67, Top 100</span>
+      </div>
+
+      <div class="comp-card">
+        <div class="comp-org">Samsung / KBTG · 2026</div>
+        <div class="comp-title">Digital Fraud Cybersecurity Hackathon</div>
+        <div class="comp-desc">Team challenge applying threat intelligence and risk-based thinking to digital fraud scenarios.</div>
+        <span class="comp-result">Participant</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap-inner">
+    <div class="section-head">
+      <h2>Skills &amp; certifications</h2>
+      <div class="section-note">Tools and credentials, grouped by area.</div>
+    </div>
+    <div class="section-body">
+      <div class="col-side"></div>
+      <div>
+        <div class="skill-block">
+          <div class="skill-cat">Programming</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span><span class="skill-tag">SQL</span><span class="skill-tag">C</span><span class="skill-tag">Go</span><span class="skill-tag">HTML/CSS</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <div class="skill-cat">Cybersecurity</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Web App Security</span><span class="skill-tag">SIEM</span><span class="skill-tag">Threat Modeling</span><span class="skill-tag">Incident Response</span><span class="skill-tag">Digital Fraud Analysis</span><span class="skill-tag">OWASP Top 10</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <div class="skill-cat">Blockchain / Web3</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Cryptography</span><span class="skill-tag">DeFi Protocols</span><span class="skill-tag">Smart Contracts</span><span class="skill-tag">On-chain Analysis</span><span class="skill-tag">Blockchain Security</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <div class="skill-cat">Tools &amp; platforms</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Git</span><span class="skill-tag">Linux</span><span class="skill-tag">Wireshark</span><span class="skill-tag">Burp Suite</span><span class="skill-tag">AI Platforms</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <div class="skill-cat">Languages</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Thai — Native</span><span class="skill-tag">English — Professional</span>
+          </div>
+        </div>
+
+        <div class="cert-list">
+          <div class="cert-row"><span class="cert-name">Cyber Security 101 (SEC-1)</span><span class="cert-issuer">TryHackMe</span></div>
+          <div class="cert-row"><span class="cert-name">kWAPTA Certification</span><span class="cert-issuer">Knight Squad Academy</span></div>
+          <div class="cert-row"><span class="cert-name">Security, Compliance &amp; Identity Fundamentals (SC-900)</span><span class="cert-issuer">Microsoft</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / FOOTER -->
+<footer id="contact">
+  <div class="footer-inner">
+    <h2>Get in touch</h2>
+    <p class="footer-desc">
+      Open to conversations about SOC and cybersecurity roles, Web3 security, or the AWS and
+      IBM Z communities at Bangkok University. Email is the fastest way to reach me.
+    </p>
+    <dl class="contact-grid">
+      <div class="contact-item"><dt>Email</dt><dd><a href="mailto:worapolsiriburi@gmail.com">worapolsiriburi@gmail.com</a></dd></div>
+      <div class="contact-item"><dt>Phone</dt><dd><a href="tel:+66636297482">+66 63 629 7482</a></dd></div>
+      <div class="contact-item"><dt>LinkedIn</dt><dd><a href="https://linkedin.com/in/worapol-siriburi-1b4532218" target="_blank" rel="noopener">worapol-siriburi</a></dd></div>
+      <div class="contact-item"><dt>GitHub</dt><dd><a href="https://github.com/worapolsiri" target="_blank" rel="noopener">worapolsiri</a></dd></div>
+    </dl>
+    <div class="footer-bottom">
+      <span>© 2026 Worapol Siriburi. Bangkok, Thailand.</span>
+      <span>Built for GitHub Pages.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('siteNav');
+  toggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+</body>
+</html>
